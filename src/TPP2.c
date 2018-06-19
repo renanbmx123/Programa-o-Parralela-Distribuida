@@ -43,9 +43,9 @@ int main(int argc, char** argv){
 		/* Initialize the array*/
         int array[ARRAY_SIZE] ;
 		/* fill the array*/
-		for (i = 0; i < ARRAY_SIZE; i++)
+		/*for (i = 0; i < ARRAY_SIZE; i++)
 			array[i] = ARRAY_SIZE - i;
-
+*/
 		/* Divede or conquer ?*/
 		if(ARRAY_SIZE <= DELTA)
 		{
@@ -65,21 +65,22 @@ int main(int argc, char** argv){
 			for (i = 1; i < proc_n; i++) {
 	        	MPI_Send(0, 0, MPI_INT, i, WORK, MPI_COMM_WORLD);
     		}		 
-
-			int *result = order(my_rank, array, ARRAY_SIZE, status);
+		order(my_rank, array, ARRAY_SIZE, status);
+			//int *result = order(my_rank, array, ARRAY_SIZE, status);
 		}
     }
     else    //Im a slave 
     {
         int size;
-		MPI_Recv(0, 0, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
-		//printf("test\n");
+	MPI_Recv(0, 0, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
+	
 
 		if(status.MPI_TAG != DIED_TAG){
 			MPI_Probe(parent(my_rank), SEND_DOWN_TAG, MPI_COMM_WORLD, &status);
 			MPI_Get_count(&status, MPI_INT, &size);
+			
 			int *array = calloc(size, sizeof(int));
-			MPI_Recv(array, size, MPI_INT, parent(my_rank), SEND_DOWN_TAG, MPI_COMM_WORLD, &status);
+			MPI_Recv(array, size, MPI_INT, parent(my_rank), SEND_DOWN_TAG, MPI_COMM_WORLD,&status);
 
 	    	
 			if(is_leaf(size, ARRAY_SIZE, proc_n))
@@ -103,9 +104,9 @@ int main(int argc, char** argv){
     }
 	if(my_rank == 0)
 	{
-    	t2 = MPI_Wtime(); //Stop counting the time
-    	printf("Execution time :%fs\n",t2-t1);
-	}
+    		t2 = MPI_Wtime(); //Stop counting the time
+	    	printf("Execution time :%fs\n",t2-t1);
+	 }
 	MPI_Finalize();    
     return 0;
 }
