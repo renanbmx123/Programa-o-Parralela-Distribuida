@@ -1,0 +1,3 @@
+PARA COMPILAR DIGITE make .
+PARA RODATA mpirun -np 7 ou 15 ou 31 TPP2
+
