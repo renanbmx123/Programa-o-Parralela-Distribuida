@@ -18,7 +18,7 @@
 
 
 
-#define ARRAY_SIZE 1000000000   // SIZE and Columns of a matrix
+#define ARRAY_SIZE 1000000000   // Array Size 1 000 000 000
 /* Tags for message control*/
 
 #define SEND_UP_TAG   1
@@ -33,9 +33,9 @@
 //#define BSORT_TAG 1
 #define QSORT_TAG 2
 /*------------------------*/
-#define DELTA 250 000 000 // Max number for conquer the array 7 process leaf only 
-//#define DELTA 250 000 000 // Max number for conquer the array 15 process leaf only
-//#define DELTA 250 000 000 // Max number for conquer the array 31 process leaf only
+#define DELTA 250000000 // Max number for conquer the array 7 process leaf only 
+#define DELTA_15 250 000 000 // Max number for conquer the array 15 process leaf only
+#define DELTA_31 250 000 000 // Max number for conquer the array 31 process leaf only
 
 /* Variables used in main program */
 //int array[ARRAY_SIZE];
